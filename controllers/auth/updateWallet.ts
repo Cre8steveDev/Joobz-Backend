@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Wallet } from '../../models/models';
+import { Wallets } from '../../models/models';
 
 // Define verifyUser Middleware for protected routes
 const updateWallet = async (req: Request, res: Response) => {
@@ -15,7 +15,7 @@ const updateWallet = async (req: Request, res: Response) => {
   try {
     // Get Wallet from the DataBase.
     // and Update the wallet with Deposited sum
-    const wallet = await Wallet.findOneAndUpdate(
+    const wallet = await Wallets.findOneAndUpdate(
       { _id: walletId },
       {
         // When doing incrementation of a field

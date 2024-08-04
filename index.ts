@@ -48,7 +48,7 @@ app.use('/api/auth', authRouter);
 connectDB().then((response) => {
   if (response)
     return app.listen(port, () =>
-      console.log('Serveris running on port: ', PORT)
+      console.log('Serveris running on port: ', port)
     );
 
   // If database connection fails

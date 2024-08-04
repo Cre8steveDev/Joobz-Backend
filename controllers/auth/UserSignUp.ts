@@ -12,31 +12,14 @@ import generateRandomNumber from '../../utils/generateRandomNumbers';
  */
 
 const UserSignUp = async (req: Request, res: Response) => {
-  const {
-    fullName,
-    email,
-    phoneNumber,
-    password,
-    category,
-    state,
-    country,
-    displayName,
-  } = req.body as RegisterData;
+  const { fullName, email, phoneNumber, password, state, country } =
+    req.body as RegisterData;
 
   // Validate request body Lengths
   // TODO: A more robust validation check should be implemented
-  const bodyArray = [
-    fullName,
-    displayName,
-    email,
-    phoneNumber,
-    password,
-    category,
-    state,
-    country,
-  ];
+  const bodyArray = [fullName, email, phoneNumber, password, state, country];
 
-  if (!bodyArray.every((item) => item.length >= 4))
+  if (!bodyArray.every((item) => item.length >= 2))
     return res.status(400).json({
       message: 'BAD REQUEST. Please check the entry you submitted in the form',
     });

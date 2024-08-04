@@ -13,6 +13,8 @@ const VerifyOTP = async (req: Request, res: Response) => {
   const { userType, OTP, email } = req.body;
   const currentTime = new Date().getTime();
 
+  console.log('ENDPOING FOR VERIFY OTP: ', OTP);
+
   if (userType === 'User') {
     try {
       const foundUser = await Users.findOne({ email: email });
@@ -31,8 +33,8 @@ const VerifyOTP = async (req: Request, res: Response) => {
       }
 
       //   Check if OTP does not match
-      if (OTP !== number) {
-        return res.status(401).json({
+      if (+OTP !== number) {
+        return res.status(403).json({
           success: false,
           message: 'Invalid OTP. Please confirm the code sent.',
         });
@@ -52,8 +54,9 @@ const VerifyOTP = async (req: Request, res: Response) => {
 
       // Return Error
     } catch (error) {
+      console.log('Error User: ', error);
       return res
-        .status(401)
+        .status(404)
         .json({ success: false, message: 'Sorry, an Error Occured' });
     }
   } else {
@@ -74,8 +77,8 @@ const VerifyOTP = async (req: Request, res: Response) => {
       }
 
       //   Check if OTP does not match
-      if (OTP !== number) {
-        return res.status(401).json({
+      if (+OTP !== number) {
+        return res.status(403).json({
           success: false,
           message: 'Invalid OTP. Please confirm the code sent.',
         });
@@ -95,8 +98,9 @@ const VerifyOTP = async (req: Request, res: Response) => {
 
       // Return Error
     } catch (error) {
+      console.log('Error Freelancer: ', error);
       return res
-        .status(401)
+        .status(404)
         .json({ success: false, message: 'Sorry, an Error Occured' });
     }
   }
