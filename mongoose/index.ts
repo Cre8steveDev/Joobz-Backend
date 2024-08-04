@@ -4,6 +4,7 @@ import { MONGO_URI } from '../config';
 export default async function connectDB() {
   // Mongoose Client Options
   const clientOptions: ConnectOptions = {
+    dbName: 'Joobz',
     serverApi: { version: '1', strict: true, deprecationErrors: true },
   };
 

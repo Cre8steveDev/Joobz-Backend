@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "joobz",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -19,8 +20,7 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.3.2",
-
+    "mongoose": "^8.3.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

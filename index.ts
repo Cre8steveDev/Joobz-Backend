@@ -13,7 +13,7 @@ import session from 'express-session';
 import connectDB from './mongoose';
 
 // import Routers
-// import authRouter from './routes/authRoute';
+import authRouter from './routes/authRoute';
 
 const app = express();
 const port = PORT || 3000;
@@ -42,15 +42,12 @@ app.get('/health', (req: Request, res: Response) => {
 });
 
 // Add route handlers as middleware
-// app.use('/api/auth', authRouter);
+app.use('/api/auth', authRouter);
 
-/////////////////////////////////
 // Connect the Database and Start The Server on Success
-/////////////////////////////////
-
 connectDB().then((response) => {
   if (response)
-    return app.listen(PORT, () =>
+    return app.listen(port, () =>
       console.log('Serveris running on port: ', PORT)
     );
 

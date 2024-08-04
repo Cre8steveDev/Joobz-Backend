@@ -1,0 +1,5 @@
+MONGO_URI=
+# MONGO_URI="mongodb://localhost:27017"
+PORT=3000
+COOKIE_SECRET=
+
