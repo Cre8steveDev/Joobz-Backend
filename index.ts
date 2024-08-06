@@ -14,6 +14,7 @@ import connectDB from './mongoose';
 
 // import Routers
 import authRouter from './routes/authRoute';
+import adsRouter from './routes/sponsoredAds';
 
 const app = express();
 const port = PORT || 3000;
@@ -43,6 +44,7 @@ app.get('/health', (req: Request, res: Response) => {
 
 // Add route handlers as middleware
 app.use('/api/auth', authRouter);
+app.use('/ads', adsRouter);
 
 // Connect the Database and Start The Server on Success
 connectDB().then((response) => {
