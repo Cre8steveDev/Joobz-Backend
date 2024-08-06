@@ -2,8 +2,14 @@ import type { Request, Response } from 'express';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import { Users } from '../../models/models';
-import { LoginData } from '../../types/global';
+import { Freelancers, Users } from '../../models/models';
+import {
+  FreelanceUser,
+  LoggedInFreelancer,
+  LoggedInUser,
+  LoginData,
+  User,
+} from '../../types/global';
 import { COOKIE_SECRET } from '../../config';
 
 const SignIn = async (req: Request, res: Response) => {
@@ -11,8 +17,16 @@ const SignIn = async (req: Request, res: Response) => {
 
   try {
     // Retrieve user from Database by the email address
-    const validUser = await Users.findOne({ email });
+    let validUser: User | FreelanceUser | null;
 
+    // Find user from Users Collection
+    validUser = await Users.findOne({ email });
+
+    if (!validUser) {
+      validUser = await Freelancers.findOne({ email });
+    }
+
+    // if Credentials is still not found then return 400
     if (!validUser) {
       return res.status(400).json({
         success: false,
@@ -21,8 +35,8 @@ const SignIn = async (req: Request, res: Response) => {
         user: null,
       });
     }
-    // Compare password from client with password stored in database
 
+    // Compare password from client with password stored in database
     const isPasswordMatch = bcryptjs.compareSync(password, validUser.password);
 
     if (!isPasswordMatch) {
@@ -40,26 +54,73 @@ const SignIn = async (req: Request, res: Response) => {
       COOKIE_SECRET!
     );
 
+    let userData: LoggedInUser | LoggedInFreelancer;
+
+    console.log('Valid User for Freelancers: ', validUser);
+
     // Destructure values from the user
-    const { fullName, profilePicture, wallet, _id } = validUser;
-    const userData = {
-      _id,
-      fullName,
-      profilePicture,
-      wallet,
-    };
+    // @ts-ignore
+    if (validUser.ROLE === 'FREELANCER') {
+      const {
+        fullName,
+        profilePicture,
+        wallet,
+        _id,
+        // @ts-ignore
+        displayName,
+        // @ts-ignore
+        emailVerified,
+        ROLE,
+        // @ts-ignore
+        location,
+      } = validUser;
+
+      userData = {
+        _id,
+        fullName,
+        displayName,
+        profilePicture,
+        wallet,
+        emailVerified,
+        ROLE,
+        location,
+      };
+    } else {
+      const {
+        fullName,
+        profilePicture,
+        wallet,
+        _id,
+        // @ts-ignore
+        emailVerified,
+        ROLE,
+        // @ts-ignore
+        location,
+      } = validUser;
+
+      userData = {
+        _id,
+        fullName,
+        profilePicture,
+        wallet,
+        ROLE,
+        emailVerified,
+        location,
+      };
+    }
 
     // Also send back other details needed on the front end
     return res.status(200).json({
       success: true,
       message: 'Logged in Successfully.',
-      auth: { id: userToken, tokenExpiry },
+      auth: { token: userToken, tokenExpiry },
       user: userData,
     });
 
     // Error handling
   } catch (error: any) {
-    return res.status(401).json({
+    console.log('Error in Sign In: ', error);
+    return res.status(500).json({
       success: false,
       message: 'Invalid Login Credentials.',
       auth: null,

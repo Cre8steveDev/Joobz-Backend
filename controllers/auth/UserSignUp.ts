@@ -58,11 +58,15 @@ const UserSignUp = async (req: Request, res: Response) => {
       wallet: newWallet._id,
       password: hashedPassword,
     });
+
     await newUser.save();
 
     // Catch any error that may have occured
   } catch (error: any) {
     console.log(error);
+    if (error?.code === 11000) {
+      return res.status(409).json({ success: false, message: error!.message });
+    }
     return res.status(403).json({ success: false, message: error!.message });
   }
 

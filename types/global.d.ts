@@ -9,10 +9,18 @@ export interface User extends Document {
   OTP: { number: number; expiry: Date };
   phoneNumber: string;
   profilePicture: string;
+  ROLE: string;
   dateJoined: Date;
   lastLogin: Date;
   isActive: boolean;
-  location: { country: string; state: string };
+  location: {
+    country: string;
+    state: string;
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  };
   languages: string[];
   companyName?: string;
   industry: string;
@@ -42,10 +50,18 @@ export interface FreelanceUser extends Document {
   OTP: { number: number; expiry: Date };
   phoneNumber: string;
   profilePicture: string;
+  ROLE: string;
   dateJoined: Date;
   lastLogin: Date;
   isActive: boolean;
-  location: { country: string; state: string };
+  location: {
+    country: string;
+    state: string;
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  };
   languages: string[];
   skills: string[];
   hourlyRate: number;
@@ -122,4 +138,39 @@ export type RegisterData = {
 export type LoginData = {
   email: string;
   password: string;
+};
+
+export type LoggedInUser = {
+  _id: ObjectId;
+  fullName: string;
+  profilePicture: string;
+  wallet: ObjectId;
+  emailVerified: boolean;
+  ROLE: string;
+  location: {
+    country: string;
+    state: string;
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  };
+};
+
+export type LoggedInFreelancer = {
+  _id: ObjectId;
+  fullName: string;
+  displayName: string;
+  profilePicture: string;
+  wallet: ObjectId;
+  emailVerified: boolean;
+  ROLE: string;
+  location: {
+    country: string;
+    state: string;
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  };
 };

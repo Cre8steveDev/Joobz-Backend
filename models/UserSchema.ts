@@ -12,12 +12,17 @@ const UserSchema = new mongoose.Schema({
     default:
       'https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg',
   },
+  ROLE: { type: String, default: 'USER' },
   dateJoined: { type: Date, default: Date.now },
   lastLogin: Date,
   isActive: { type: Boolean, default: true },
   location: {
     country: String,
     state: String,
+    latitude: { type: Number, default: 0.0 },
+    longitude: { type: Number, default: 0.0 },
+    latitudeDelta: { type: Number, default: 0.0 },
+    longitudeDelta: { type: Number, default: 0.0 },
   },
   languages: [String],
   companyName: String,
