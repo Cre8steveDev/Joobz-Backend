@@ -15,6 +15,8 @@ import connectDB from './mongoose';
 // import Routers
 import authRouter from './routes/authRoute';
 import adsRouter from './routes/sponsoredAds';
+import getTopRatedProfessionals from './controllers/getTopRatedProfessionals';
+import getProfessionalsByCategory from './controllers/getProfessionalsByCategory';
 
 const app = express();
 const port = PORT || 3000;
@@ -41,6 +43,12 @@ app.use(
 app.get('/health', (req: Request, res: Response) => {
   res.send('Yuuup! Server still up and running 😄');
 });
+
+// Get Top 3 Rated Professionals
+app.get('/get-professionals', getTopRatedProfessionals);
+
+// Get Professionals by Category
+app.post('/get-professionals-by-category', getProfessionalsByCategory);
 
 // Add route handlers as middleware
 app.use('/api/auth', authRouter);

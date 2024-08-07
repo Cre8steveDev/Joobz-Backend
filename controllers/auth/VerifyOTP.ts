@@ -13,8 +13,6 @@ const VerifyOTP = async (req: Request, res: Response) => {
   const { userType, OTP, email } = req.body;
   const currentTime = new Date().getTime();
 
-  console.log('ENDPOING FOR VERIFY OTP: ', OTP);
-
   if (userType === 'User') {
     try {
       const foundUser = await Users.findOne({ email: email });

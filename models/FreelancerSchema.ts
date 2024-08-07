@@ -6,6 +6,7 @@ const FreelancerSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   emailVerified: { type: Boolean, default: false },
+  category: { type: String },
   OTP: { number: Number, expiry: Number },
   phoneNumber: { type: String, required: true },
   profilePicture: {
@@ -19,7 +20,7 @@ const FreelancerSchema = new mongoose.Schema({
   isActive: { type: Boolean, default: true },
   location: {
     country: String,
-    city: String,
+    state: String,
     latitude: { type: Number, default: 0.0 },
     longitude: { type: Number, default: 0.0 },
     latitudeDelta: { type: Number, default: 0.0 },

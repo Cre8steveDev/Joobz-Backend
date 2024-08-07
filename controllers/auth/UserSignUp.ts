@@ -24,11 +24,6 @@ const UserSignUp = async (req: Request, res: Response) => {
       message: 'BAD REQUEST. Please check the entry you submitted in the form',
     });
 
-  // Test req.body
-  console.log('=================================');
-  console.log('User SignUp Body: ', req.body);
-  console.log('=================================');
-
   // Create a new wallet to be saved for the user
   const newWallet = new Wallets();
   try {
@@ -51,7 +46,7 @@ const UserSignUp = async (req: Request, res: Response) => {
     // Create New User
     const newUser = new Users({
       fullName,
-      email,
+      email: email.toLowerCase().trim(),
       phoneNumber,
       OTP: { number: randomOTP, expiry: OTPExpiry },
       location: { state, country },

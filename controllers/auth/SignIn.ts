@@ -56,8 +56,6 @@ const SignIn = async (req: Request, res: Response) => {
 
     let userData: LoggedInUser | LoggedInFreelancer;
 
-    console.log('Valid User for Freelancers: ', validUser);
-
     // Destructure values from the user
     // @ts-ignore
     if (validUser.ROLE === 'FREELANCER') {

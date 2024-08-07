@@ -28,9 +28,6 @@ const RenewOTP = async (req: Request, res: Response) => {
         { $set: { OTP: { number: randomOTP, expiry: OTPExpiry } } }
       );
 
-      console.log('Pretend Email of OTP:', randomOTP);
-      console.log('Email: ', email);
-
       // Return Successful Notification
       return res
         .status(200)
@@ -53,9 +50,6 @@ const RenewOTP = async (req: Request, res: Response) => {
         { email: email },
         { $set: { OTP: { number: randomOTP, expiry: OTPExpiry } } }
       );
-
-      console.log('Pretend Email of OTP:', randomOTP);
-      console.log('Email: ', email);
 
       // Return Successful Notification
       return res

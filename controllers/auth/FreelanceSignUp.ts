@@ -41,11 +41,6 @@ const FreelanceSignUp = async (req: Request, res: Response) => {
       message: 'BAD REQUEST. Please check the entry you submitted in the form',
     });
 
-  // Test req.body
-  console.log('=================================');
-  console.log('Freelancers SignUp Body: ', req.body);
-  console.log('=================================');
-
   // Create a new wallet to be saved for the user
   const newWallet = new Wallets();
   try {
@@ -65,11 +60,13 @@ const FreelanceSignUp = async (req: Request, res: Response) => {
     const randomOTP = generateRandomNumber(5);
     const OTPExpiry = new Date().getTime() + 1000 * 60 * 5;
 
+    console.log('GENERATED OTP: ', randomOTP);
+
     // Create New Freelancer
     const newUser = new Freelancers({
       fullName,
-      displayName,
-      email,
+      displayName: displayName.trim(),
+      email: email.toLowerCase().trim(),
       phoneNumber,
       category,
       OTP: { number: randomOTP, expiry: OTPExpiry },
