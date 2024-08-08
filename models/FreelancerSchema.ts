@@ -28,8 +28,8 @@ const FreelancerSchema = new mongoose.Schema({
   },
   languages: [String],
   skills: [String],
-  hourlyRate: Number,
-  availability: String,
+  hourlyRate: { type: Number, default: 0.0 },
+  availability: [String],
   bio: String,
   title: String, // e.g., "Senior Web Developer"
   education: [
@@ -77,11 +77,15 @@ const FreelancerSchema = new mongoose.Schema({
     paypalEmail: String,
     bankInfo: mongoose.Schema.Types.Mixed,
   },
-  jobsCompleted: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
-  currentJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
-  wallet: { type: mongoose.Schema.Types.ObjectId, ref: 'Wallet' },
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+
+  jobsCompleted: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Jobs' }],
+  currentJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Jobs' }],
+  wallet: { type: mongoose.Schema.Types.ObjectId, ref: 'Wallets' },
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],
   averageRating: { type: Number, default: 0 },
+  invitations: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'JobInvitations' },
+  ],
 });
 
 export default FreelancerSchema;

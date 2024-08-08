@@ -6,10 +6,11 @@ const { ObjectId } = Schema.Types;
 const ChatSchema = new Schema(
   {
     userId: { type: ObjectId, ref: 'Users' },
+    freelancerId: { type: ObjectId, ref: 'Freelancers' },
     title: String,
-    messages: [
-      { role: String, message: String, date: String, photo_url: String },
-    ],
+    freelancerProfilePhoto: String,
+    messages: [{ role: String, message: String, date: String, photo: String }],
+    invitations: [{ type: ObjectId, ref: 'JobInvitations' }],
   },
   { timestamps: true }
 );

@@ -5,7 +5,6 @@ import { Freelancers } from '../models/models';
 const getProfessionalsByCategory = async (req: Request, res: Response) => {
   // Retreive top freelancers
   const { category, userLocation } = req.body;
-  console.log('CATEGORY AND USER LOCATION: ', category, userLocation);
 
   try {
     const allFreelancers = await Freelancers.aggregate([

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 // Job Review Schema
 const ReviewSchema = new mongoose.Schema({
-  job: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true },
+  job: { type: mongoose.Schema.Types.ObjectId, ref: 'Jobs', required: true },
   reviewer: {
     type: mongoose.Schema.Types.ObjectId,
     refPath: 'reviewerType',
@@ -10,7 +10,7 @@ const ReviewSchema = new mongoose.Schema({
   },
   reviewerType: {
     type: String,
-    enum: ['User', 'Freelancer'],
+    enum: ['Users', 'Freelancers'],
     required: true,
   },
   reviewee: {
@@ -20,7 +20,7 @@ const ReviewSchema = new mongoose.Schema({
   },
   revieweeType: {
     type: String,
-    enum: ['User', 'Freelancer'],
+    enum: ['Users', 'Freelancers'],
     required: true,
   },
   rating: { type: Number, required: true, min: 1, max: 5 },

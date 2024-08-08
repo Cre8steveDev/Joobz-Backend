@@ -6,14 +6,17 @@ import FreelancerSchema from './FreelancerSchema';
 import JobSchema from './JobSchema';
 import ReviewSchema from './ReviewSchema';
 import WalletSchema from './WalletSchema';
-
-// const Chats = mongoose.model('Chats', chatSchema);
+import ChatSchema from './ChatSchema';
+import JobInvitationSchema from './JobInvitationSchema';
 
 // Create all Models from the Schemas
 const Users = mongoose.model('Users', UserSchema);
-const Freelancers = mongoose.model('Freelancer', FreelancerSchema);
+const Freelancers = mongoose.model('Freelancers', FreelancerSchema);
 const Jobs = mongoose.model('Jobs', JobSchema);
 const Reviews = mongoose.model('Reviews', ReviewSchema);
 const Wallets = mongoose.model('Wallets', WalletSchema);
+const Chats = mongoose.model('Chats', ChatSchema);
+const JobInvitation = mongoose.model('JobInvitations', JobInvitationSchema);
 
-export { Users, Freelancers, Jobs, Reviews, Wallets };
+// Export the models
+export { Users, Freelancers, Jobs, Reviews, Wallets, Chats, JobInvitation };

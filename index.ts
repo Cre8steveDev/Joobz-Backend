@@ -17,6 +17,8 @@ import authRouter from './routes/authRoute';
 import adsRouter from './routes/sponsoredAds';
 import getTopRatedProfessionals from './controllers/getTopRatedProfessionals';
 import getProfessionalsByCategory from './controllers/getProfessionalsByCategory';
+import getSingleProfessionalById from './controllers/getSingleProfessionalById';
+import getProfessionalsMarkerByLocation from './controllers/getProfessionalsMarkerByLocation';
 
 const app = express();
 const port = PORT || 3000;
@@ -49,6 +51,12 @@ app.get('/get-professionals', getTopRatedProfessionals);
 
 // Get Professionals by Category
 app.post('/get-professionals-by-category', getProfessionalsByCategory);
+
+// Get Single Professional by His/Her Id
+app.post('/get-single-professional', getSingleProfessionalById);
+
+// Get All markers for the professionals in user's location
+app.post('/get-professionals-markers', getProfessionalsMarkerByLocation);
 
 // Add route handlers as middleware
 app.use('/api/auth', authRouter);

@@ -10,6 +10,7 @@ import getWallet from '../controllers/auth/getWallet';
 import updateWallet from '../controllers/auth/updateWallet';
 import VerifyOTP from '../controllers/auth/VerifyOTP';
 import RenewOTP from '../controllers/auth/RenewOTP';
+import getUserDataForDashboard from '../controllers/auth/getUserDataForDashboard';
 
 //  Instantiate Auth Router
 const router = Router();
@@ -19,6 +20,9 @@ router.post('/signup/user', UserSignUp);
 router.post('/signup/freelancer', FreelanceSignUp);
 router.post('/verify-otp', VerifyOTP);
 router.post('/renew-otp', RenewOTP);
+
+// Get user profile Data.
+router.post('/get-user-profile-data', getUserDataForDashboard);
 
 router.post('/signin', SignIn);
 router.get('/refresh-token', verifyUser, refreshToken);

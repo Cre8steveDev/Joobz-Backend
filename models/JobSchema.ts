@@ -4,7 +4,11 @@ import mongoose from 'mongoose';
 const JobSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  client: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users',
+    required: true,
+  },
   category: { type: String, required: true },
   subCategory: String,
   budget: {
@@ -21,7 +25,7 @@ const JobSchema = new mongoose.Schema({
   },
   proposals: [
     {
-      freelancer: { type: mongoose.Schema.Types.ObjectId, ref: 'Freelancer' },
+      freelancer: { type: mongoose.Schema.Types.ObjectId, ref: 'Freelancers' },
       coverLetter: String,
       proposedAmount: Number,
       status: {
@@ -32,7 +36,7 @@ const JobSchema = new mongoose.Schema({
       dateSubmitted: { type: Date, default: Date.now },
     },
   ],
-  hiredFreelancer: { type: mongoose.Schema.Types.ObjectId, ref: 'Freelancer' },
+  hiredFreelancer: { type: mongoose.Schema.Types.ObjectId, ref: 'Freelancers' },
   completionDate: Date,
 });
 

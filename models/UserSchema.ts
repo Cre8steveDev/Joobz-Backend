@@ -41,10 +41,13 @@ const UserSchema = new mongoose.Schema({
       details: mongoose.Schema.Types.Mixed,
     },
   ],
-  jobsPosted: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
-  wallet: { type: mongoose.Schema.Types.ObjectId, ref: 'Wallet' },
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+  jobsPosted: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Jobs' }],
+  wallet: { type: mongoose.Schema.Types.ObjectId, ref: 'Wallets' },
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],
   averageRating: { type: Number, default: 0 },
+  invitations: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'JobInvitations' },
+  ],
 });
 
 export default UserSchema;
