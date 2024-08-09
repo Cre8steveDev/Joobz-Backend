@@ -1,51 +1,43 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { Wallets } from '../../models/models';
 
-// Define verifyUser Middleware for protected routes
 const updateWallet = async (req: Request, res: Response) => {
   // @ts-ignore
-  const { walletId } = req.user;
+  const { wallet, _id } = req.user;
   const { reference: Txreference, amount } = req.body;
-
-  // A Safe Guard to prevent someone intercepting the request,
-  // Will be to query the transaction from paystack using the
-  // reference then getting the status and amount from there.
-  // Not implemented.
 
   try {
     // Get Wallet from the DataBase.
     // and Update the wallet with Deposited sum
-    const wallet = await Wallets.findOneAndUpdate(
-      { _id: walletId },
+    const walletUpdate = await Wallets.findOneAndUpdate(
+      { _id: wallet },
       {
-        // When doing incrementation of a field
-        $inc: { currentBalance: amount },
+        $inc: { current_balance: amount },
         $push: {
-          transactions: {
-            amount: amount,
-            transactionType: 'Deposit',
-            service: '',
+          transaction_history: {
+            userId: _id,
+            transaction_ref: Txreference,
+            transaction_type: 'Deposit',
+            payment_for: 'Funding Account',
             date: new Date().toISOString(),
           },
         },
-      },
-      { new: true }
-    );
+      }
+    ).select('current_balance transaction_history');
 
-    if (wallet) {
-      // Return Success - Wallet
+    if (walletUpdate) {
       return res.status(200).json({
         success: true,
         message: 'Updated',
+        wallet: walletUpdate,
       });
     } else {
-      // If wallet not found
       throw new Error('Wallet not found.');
     }
 
     // Error handling
   } catch (error) {
-    return res.status(401).json({
+    return res.status(500).json({
       success: false,
       message: 'Unable to Update Wallet.',
       wallet: null,

@@ -48,7 +48,7 @@ const SignIn = async (req: Request, res: Response) => {
       });
     }
     // if they match, then create a jsonwebtoken and sign the user Id and send back
-    const tokenExpiry = new Date().getTime() + 20 * 60 * 1000;
+    const tokenExpiry = new Date().getTime() + 50 * 60 * 1000;
     const userToken = jwt.sign(
       { id: validUser._id, tokenExpiry },
       COOKIE_SECRET!
@@ -69,6 +69,7 @@ const SignIn = async (req: Request, res: Response) => {
         // @ts-ignore
         emailVerified,
         ROLE,
+        email,
         // @ts-ignore
         location,
       } = validUser;
@@ -80,6 +81,8 @@ const SignIn = async (req: Request, res: Response) => {
         profilePicture,
         wallet,
         emailVerified,
+        // @ts-ignore
+        email,
         ROLE,
         location,
       };
@@ -92,7 +95,7 @@ const SignIn = async (req: Request, res: Response) => {
         // @ts-ignore
         emailVerified,
         ROLE,
-        // @ts-ignore
+        email,
         location,
       } = validUser;
 
@@ -102,6 +105,8 @@ const SignIn = async (req: Request, res: Response) => {
         profilePicture,
         wallet,
         ROLE,
+        // @ts-ignore
+        email,
         emailVerified,
         location,
       };

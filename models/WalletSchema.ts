@@ -8,9 +8,9 @@ const WalletSchema = new Schema(
       {
         userId: String,
         transaction_ref: String,
-        transaction_status: String,
-        transaction_message: String,
+        transaction_type: String,
         payment_for: String,
+        date: Date,
       },
     ],
   },

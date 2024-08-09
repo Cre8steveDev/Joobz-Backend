@@ -31,9 +31,6 @@ const getUserDataForDashboard = async (req: Request, res: Response) => {
       });
     }
 
-    // Print user object to check
-    console.log('THE FOUND VALID USER: \n', validUser);
-
     // Also send back other details needed on the front end
     return res.status(200).json({
       success: true,
