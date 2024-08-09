@@ -11,6 +11,8 @@ import updateWallet from '../controllers/auth/updateWallet';
 import VerifyOTP from '../controllers/auth/VerifyOTP';
 import RenewOTP from '../controllers/auth/RenewOTP';
 import getUserDataForDashboard from '../controllers/auth/getUserDataForDashboard';
+import updateUserLocation from '../controllers/auth/updateUserLocation';
+import updateUserProfile from '../controllers/auth/updateUserProfile';
 
 //  Instantiate Auth Router
 const router = Router();
@@ -18,14 +20,21 @@ const router = Router();
 // AUTHORIZATION RELATED ROUTES
 router.post('/signup/user', UserSignUp);
 router.post('/signup/freelancer', FreelanceSignUp);
+router.post('/signin', SignIn);
 router.post('/verify-otp', VerifyOTP);
 router.post('/renew-otp', RenewOTP);
+router.get('/refresh-token', verifyUser, refreshToken);
 
 // Get user profile Data.
 router.post('/get-user-profile-data', getUserDataForDashboard);
 
-router.post('/signin', SignIn);
-router.get('/refresh-token', verifyUser, refreshToken);
+// Update user Location
+router.post('/update-location', updateUserLocation);
+
+// Update User Profile
+router.post('/update-user-profile', updateUserProfile);
+
+// Wallets
 router.get('/get-wallet', verifyUser, getWallet);
 router.post('/update-wallet', verifyUser, updateWallet);
 
