@@ -14,6 +14,7 @@ const verifyUser = async (req: Request, res: Response, next: NextFunction) => {
       message: 'User not authorized.',
     });
   }
+
   //   Try to verify the authorization that was given
   jwt.verify(userAuthorization, COOKIE_SECRET!, async (err: any, payload) => {
     if (err) {
@@ -22,8 +23,9 @@ const verifyUser = async (req: Request, res: Response, next: NextFunction) => {
         message: 'User not authorized. Please Sign In.',
       });
     }
+
     // if the token has expired, return unauthorized
-    const currentTime = new Date().getTime();
+    const currentTime = Date.now();
     // @ts-ignore
     if (payload && currentTime > payload.tokenExpiry) {
       return res.status(401).json({
@@ -31,6 +33,7 @@ const verifyUser = async (req: Request, res: Response, next: NextFunction) => {
         message: 'Session has expired',
       });
     }
+
     // Verify that the user id is a valid registered user
     try {
       const { id } = payload as jwt.JwtPayload;
@@ -46,9 +49,9 @@ const verifyUser = async (req: Request, res: Response, next: NextFunction) => {
       throw new Error();
     } catch (error) {
       console.log(error);
-      return res.status(401).json({
+      return res.status(500).json({
         success: false,
-        message: 'User not authorized. Please Sign In.',
+        message: 'An error occured.',
       });
     }
   });

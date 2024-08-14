@@ -10,7 +10,8 @@ const getTopRatedProfessionals = async (req: Request, res: Response) => {
     })
       .sort({ averageRating: -1 })
       .limit(3)
-      .select('_id fullName category averageRating location profilePicture');
+      .select('_id fullName category averageRating location profilePicture')
+      .lean();
 
     return res.status(200).json({
       success: true,

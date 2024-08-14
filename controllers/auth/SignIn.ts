@@ -47,8 +47,10 @@ const SignIn = async (req: Request, res: Response) => {
         user: null,
       });
     }
-    // if they match, then create a jsonwebtoken and sign the user Id and send back
-    const tokenExpiry = new Date().getTime() + 50 * 60 * 1000;
+
+    // If they match, then create a jsonwebtoken
+    // and sign the user Id and send back
+    const tokenExpiry = Date.now() + 20 * 60 * 1000;
     const userToken = jwt.sign(
       { id: validUser._id, tokenExpiry },
       COOKIE_SECRET!

@@ -58,7 +58,7 @@ const FreelanceSignUp = async (req: Request, res: Response) => {
     const hashedPassword = bcryptjs.hashSync(password, salt);
 
     const randomOTP = generateRandomNumber(5);
-    const OTPExpiry = new Date().getTime() + 1000 * 60 * 5;
+    const OTPExpiry = Date.now() + 1000 * 60 * 5;
 
     console.log('GENERATED OTP: ', randomOTP);
 

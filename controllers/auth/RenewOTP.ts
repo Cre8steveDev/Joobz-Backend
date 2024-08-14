@@ -14,7 +14,7 @@ const RenewOTP = async (req: Request, res: Response) => {
 
   // Generate OTP Values
   const randomOTP = generateRandomNumber(5);
-  const OTPExpiry = new Date().getTime() + 1000 * 60 * 5;
+  const OTPExpiry = Date.now() + 1000 * 60 * 5;
 
   if (userType === 'User') {
     try {

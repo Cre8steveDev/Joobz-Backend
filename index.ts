@@ -15,6 +15,8 @@ import connectDB from './mongoose';
 // import Routers
 import authRouter from './routes/authRoute';
 import adsRouter from './routes/sponsoredAds';
+import jobRouter from './routes/jobsRoute';
+
 import getTopRatedProfessionals from './controllers/getTopRatedProfessionals';
 import getProfessionalsByCategory from './controllers/getProfessionalsByCategory';
 import getSingleProfessionalById from './controllers/getSingleProfessionalById';
@@ -61,6 +63,7 @@ app.post('/get-professionals-markers', getProfessionalsMarkerByLocation);
 // Add route handlers as middleware
 app.use('/api/auth', authRouter);
 app.use('/ads', adsRouter);
+app.use('/api/jobs', jobRouter);
 
 // Connect the Database and Start The Server on Success
 connectDB().then((response) => {

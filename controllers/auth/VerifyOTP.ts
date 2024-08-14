@@ -11,7 +11,7 @@ import { Users, Freelancers } from '../../models/models';
 const VerifyOTP = async (req: Request, res: Response) => {
   // Retrieve user type from request body
   const { userType, OTP, email } = req.body;
-  const currentTime = new Date().getTime();
+  const currentTime = Date.now();
 
   if (userType === 'User') {
     try {

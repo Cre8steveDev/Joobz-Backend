@@ -15,9 +15,11 @@ const getSingleProfessionalById = async (req: Request, res: Response) => {
 
   // Retrieve the Data from Database
   try {
-    const freelancer = await Freelancers.findById(userId).select(
-      '_id fullName category averageRating location profilePicture dateJoined lastLogin isActive languages skills hourlyRate availability bio title education experience portfolio certifications socialMedia jobsCompleted currentJobs reviews '
-    );
+    const freelancer = await Freelancers.findById(userId)
+      .select(
+        '_id fullName category averageRating location profilePicture dateJoined lastLogin isActive languages skills hourlyRate availability bio title education experience portfolio certifications socialMedia jobsCompleted currentJobs reviews '
+      )
+      .lean();
 
     return res.status(200).json({
       success: true,
