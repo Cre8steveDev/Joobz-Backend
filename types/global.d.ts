@@ -145,7 +145,7 @@ export type LoggedInUser = {
   fullName: string;
   profilePicture: string;
   wallet: ObjectId;
-
+  email: string;
   emailVerified: boolean;
   accountVerified: boolean;
   ROLE: string;
@@ -154,8 +154,6 @@ export type LoggedInUser = {
     state: string;
     latitude: number;
     longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
   };
 };
 
@@ -163,6 +161,7 @@ export type LoggedInFreelancer = {
   _id: ObjectId;
   fullName: string;
   displayName: string;
+  email: string;
   profilePicture: string;
   emailVerified: boolean;
   accountVerified: boolean;
@@ -173,7 +172,5 @@ export type LoggedInFreelancer = {
     state: string;
     latitude: number;
     longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
   };
 };

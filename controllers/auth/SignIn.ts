@@ -23,7 +23,7 @@ const SignIn = async (req: Request, res: Response) => {
     validUser = await Users.findOne({ email });
 
     if (!validUser) {
-      validUser = await Freelancers.findOne({ email });
+      validUser = await Freelancers.findOne({ email }).lean();
     }
 
     // if Credentials is still not found then return 400
@@ -68,13 +68,12 @@ const SignIn = async (req: Request, res: Response) => {
         _id,
         // @ts-ignore
         displayName,
-        // @ts-ignore
         emailVerified,
+        accountVerified,
         ROLE,
         email,
-        // @ts-ignore
         location,
-      } = validUser;
+      } = validUser as FreelanceUser;
 
       userData = {
         _id,
@@ -83,7 +82,7 @@ const SignIn = async (req: Request, res: Response) => {
         profilePicture,
         wallet,
         emailVerified,
-        // @ts-ignore
+        accountVerified,
         email,
         ROLE,
         location,
@@ -96,6 +95,7 @@ const SignIn = async (req: Request, res: Response) => {
         _id,
         // @ts-ignore
         emailVerified,
+        accountVerified,
         ROLE,
         email,
         location,
@@ -107,9 +107,9 @@ const SignIn = async (req: Request, res: Response) => {
         profilePicture,
         wallet,
         ROLE,
-        // @ts-ignore
         email,
         emailVerified,
+        accountVerified,
         location,
       };
     }
