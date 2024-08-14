@@ -14,12 +14,19 @@ const getSingleJobData = async (req: Request, res: Response) => {
 
   try {
     // Find all Jobs by the user
-    const allUserJobs = await Jobs.findById(jobId).lean();
+    const job = await Jobs.findById(jobId)
+      .populate({
+        path: 'client',
+        select:
+          'fullName email phoneNumber profilePicture companyName industry socialMedia _id',
+      })
+      .populate(['proposals'])
+      .lean();
 
-    return res.status(201).json({ success: true, jobs: allUserJobs });
+    return res.status(200).json({ success: true, job });
   } catch (error) {
     console.log('Error occured: ', error);
-    return res.status(500).json({ success: false, jobs: null });
+    return res.status(500).json({ success: false, job: null });
   }
 };
 
