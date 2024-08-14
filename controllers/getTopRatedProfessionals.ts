@@ -6,7 +6,7 @@ const getTopRatedProfessionals = async (req: Request, res: Response) => {
   // Retreive top freelancers
   try {
     const topFreelancers = await Freelancers.find({
-      averageRating: { $exists: true },
+      averageRating: { $exists: true, $gte: 4 },
     })
       .sort({ averageRating: -1 })
       .limit(3)

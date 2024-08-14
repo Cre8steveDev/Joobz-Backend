@@ -9,6 +9,8 @@ export interface User extends Document {
   OTP: { number: number; expiry: Date };
   phoneNumber: string;
   profilePicture: string;
+  emailVerified: boolean;
+  accountVerified: boolean;
   ROLE: string;
   dateJoined: Date;
   lastLogin: Date;
@@ -18,8 +20,6 @@ export interface User extends Document {
     state: string;
     latitude: number;
     longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
   };
   languages: string[];
   companyName?: string;
@@ -48,6 +48,8 @@ export interface FreelanceUser extends Document {
   email: string;
   password: string;
   OTP: { number: number; expiry: Date };
+  emailVerified: boolean;
+  accountVerified: boolean;
   phoneNumber: string;
   profilePicture: string;
   ROLE: string;
@@ -59,8 +61,6 @@ export interface FreelanceUser extends Document {
     state: string;
     latitude: number;
     longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
   };
   languages: string[];
   skills: string[];
@@ -145,7 +145,9 @@ export type LoggedInUser = {
   fullName: string;
   profilePicture: string;
   wallet: ObjectId;
+
   emailVerified: boolean;
+  accountVerified: boolean;
   ROLE: string;
   location: {
     country: string;
@@ -162,8 +164,9 @@ export type LoggedInFreelancer = {
   fullName: string;
   displayName: string;
   profilePicture: string;
-  wallet: ObjectId;
   emailVerified: boolean;
+  accountVerified: boolean;
+  wallet: ObjectId;
   ROLE: string;
   location: {
     country: string;

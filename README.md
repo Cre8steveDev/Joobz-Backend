@@ -43,6 +43,264 @@ I invite you to explore Joobz and experience the future of service networking â€
 
 ## Productivity Tools
 
-- React Native and Expo Code Snippets (VSCode Extension by Cre8steve)
-- Visual Studio Code
-- Claude AI for debugging and documentation research
+Thank you for providing the detailed information about your Express.js app routes and controllers. I'll create documentation for the main endpoints you've shared. Here's a draft of the documentation you can include in your README:
+
+## API Documentation
+
+## Authentication
+
+All endpoints relating to Authentication Listed under this heading are prefixed with `/api/auth`.
+
+Most endpoints require authentication. Include the JWT token in the Authorization header:
+
+```javscript
+
+Authorization: Bearer <your_token_here>
+
+```
+
+## Endpoints
+
+### User Registration
+
+- **URL**: `/signup/user`
+- **Method**: `POST`
+- **Description**: Register a new user account
+- **Request Body**:
+
+  ```json
+  {
+    "fullName": "string",
+    "email": "string",
+    "phoneNumber": "string",
+    "password": "string",
+    "state": "string",
+    "country": "string"
+  }
+  ```
+
+- **Success Response**:
+  - **Code**: 201
+  - **Content**: `{ "success": true, "message": "User Account created successfully." }`
+- **Error Response**:
+  - **Code**: 400, 409, or 403
+  - **Content**: `{ "success": false, "message": "Error message" }`
+
+### Freelancer Registration
+
+- **URL**: `/signup/freelancer`
+- **Method**: `POST`
+- **Description**: Register a new freelancer account
+- **Request Body**:
+
+  ```json
+  {
+    "fullName": "string",
+    "email": "string",
+    "phoneNumber": "string",
+    "password": "string",
+    "state": "string",
+    "country": "string"
+  }
+  ```
+
+### User/Freelancer Sign In
+
+- **URL**: `/signin`
+- **Method**: `POST`
+- **Description**: Authenticate a user or freelancer
+- **Request Body**:
+
+  ```json
+  {
+    "email": "string",
+    "password": "string"
+  }
+  ```
+
+- **Success Response**:
+
+  - **Code**: 200
+  - **Content**:
+
+    ```json
+    {
+      "success": true,
+      "message": "Logged in Successfully.",
+      "auth": {
+        "token": "string",
+        "tokenExpiry": "number"
+      },
+      "user": {
+        // User or Freelancer data
+      }
+    }
+    ```
+
+- **Error Response**:
+  - **Code**: 400 or 500
+  - **Content**: `{ "success": false, "message": "Error message", "auth": null, "user": null }`
+
+### Verify OTP
+
+- **URL**: `/verify-otp`
+- **Method**: `POST`
+- **Description**: Verify the One-Time Password for account activation
+
+### Renew OTP
+
+- **URL**: `/renew-otp`
+- **Method**: `POST`
+- **Description**: Request a new One-Time Password
+
+### Refresh Token
+
+- **URL**: `/refresh-token`
+- **Method**: `GET`
+- **Description**: Get a new access token
+- **Authentication**: Required
+
+### Get User Profile Data
+
+- **URL**: `/get-user-profile-data`
+- **Method**: `POST`
+- **Description**: Retrieve user profile data for dashboard
+- **Authentication**: Required
+
+### Get Freelancer Profile Data
+
+- **URL**: `/get-freelancer-profile-data`
+- **Method**: `POST`
+- **Description**: Retrieve freelancer profile data for dashboard
+- **Authentication**: Required (Freelancer only)
+
+### Update User Location
+
+- **URL**: `/update-location`
+- **Method**: `POST`
+- **Description**: Update user's location information
+
+### Update Freelancer Location
+
+- **URL**: `/update-freelancer-location`
+- **Method**: `POST`
+- **Description**: Update freelancer's location information
+
+### Update User Profile
+
+- **URL**: `/update-user-profile`
+- **Method**: `POST`
+- **Description**: Update user's profile information
+
+### Get Wallet
+
+- **URL**: `/get-wallet`
+- **Method**: `GET`
+- **Description**: Retrieve user's wallet information
+- **Authentication**: Required
+
+### Update Wallet
+
+- **URL**: `/update-wallet`
+- **Method**: `POST`
+- **Description**: Update user's wallet information
+- **Authentication**: Required
+
+### Get API Key
+
+- **URL**: `/get-api-key`
+- **Method**: `GET`
+- **Description**: Retrieve Paystack API key for payments
+- **Authentication**: Required
+- **Success Response**:
+  - **Code**: 200
+  - **Content**: `{ "apiKey": "string" }`
+
+### Create New Job
+
+- **URL**: `/create-new-job`
+- **Method**: `POST`
+- **Description**: Create a new job tied to the user's account
+- **Authentication**: Required
+- **Request Body**:
+
+  ```json
+  {
+    "job": {
+      "title": "string",
+      "description": "string",
+      "category": "string",
+      "budget": "number",
+      "skills": "string (comma-separated)",
+      "state": "string",
+      "pictures": "array",
+      "deadline": "date"
+    }
+  }
+  ```
+
+- **Success Response**:
+  - **Code**: 201
+  - **Content**: `{ "success": true }`
+- **Error Response**:
+  - **Code**: 403
+  - **Content**: `{ "success": false }`
+
+### Get All Jobs by User
+
+- **URL**: `/all-by-user`
+- **Method**: `GET`
+- **Description**: Retrieve all jobs created by the authenticated user
+- **Authentication**: Required
+- **Success Response**:
+
+  - **Code**: 200
+  - **Content**:
+
+    ```json
+    {
+      "success": true,
+      "jobs": [
+        {
+          // Job object
+        }
+      ]
+    }
+    ```
+
+- **Error Response**:
+  - **Code**: 500
+  - **Content**: `{ "success": false, "jobs": null }`
+
+### Get Single Job Data
+
+- **URL**: `/job-data`
+- **Method**: `POST`
+- **Description**: Retrieve detailed data for a single job
+- **Authentication**: Required
+- **Request Body**:
+
+  ```json
+  {
+    "jobId": "string"
+  }
+  ```
+
+- **Success Response**:
+
+  - **Code**: 200
+  - **Content**:
+
+    ```json
+    {
+      "success": true,
+      "job": {
+        // Detailed job object including (filtered client)
+        //and proposals data
+      }
+    }
+    ```
+
+- **Error Response**:
+  - **Code**: 500
+  - **Content**: `{ "success": false, "job": null }`

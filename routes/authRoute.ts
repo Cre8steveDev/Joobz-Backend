@@ -13,6 +13,8 @@ import RenewOTP from '../controllers/auth/RenewOTP';
 import getUserDataForDashboard from '../controllers/auth/getUserDataForDashboard';
 import updateUserLocation from '../controllers/auth/updateUserLocation';
 import updateUserProfile from '../controllers/auth/updateUserProfile';
+import getFreelancerDataForDashboard from '../controllers/auth/getFreelancerDataForDashboard';
+import updateFreelancerLocation from '../controllers/auth/updateFreelancerLocation';
 
 //  Instantiate Auth Router
 const router = Router();
@@ -25,11 +27,17 @@ router.post('/verify-otp', VerifyOTP);
 router.post('/renew-otp', RenewOTP);
 router.get('/refresh-token', verifyUser, refreshToken);
 
-// Get user profile Data.
-router.post('/get-user-profile-data', getUserDataForDashboard);
+// Get user and freelancer profile Data.
+router.post('/get-user-profile-data', verifyUser, getUserDataForDashboard);
+router.post(
+  '/get-freelancer-profile-data',
+  verifyUser,
+  getFreelancerDataForDashboard
+);
 
 // Update user Location
 router.post('/update-location', updateUserLocation);
+router.post('/update-freelancer-location', updateFreelancerLocation);
 
 // Update User Profile
 router.post('/update-user-profile', updateUserProfile);

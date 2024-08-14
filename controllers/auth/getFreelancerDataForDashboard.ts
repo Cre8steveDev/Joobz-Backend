@@ -1,20 +1,20 @@
 import type { Request, Response } from 'express';
 
-import { Users } from '../../models/models';
+import { Freelancers } from '../../models/models';
 
 /**
- * Get User Data for Dashboard on Profile
+ * Get Freelancer Data for Dashboard on Profile
  * @param req Request object
  * @param res Response Object
- * @returns a filtered user object or error message object and null
+ * @returns a filtered freelancer object or error message object and null
  */
-const getUserDataForDashboard = async (req: Request, res: Response) => {
+const getFreelancerDataForDashboard = async (req: Request, res: Response) => {
   const { userId } = req.body;
 
   try {
-    // Retrieve user from Database by _id
-    // Find user from Users Collection
-    const validUser = await Users.findById(userId)
+    // Retrieve Freelancer from Database by _id
+    // Find Freelancer from Freelancers Collection
+    const validUser = await Freelancers.findById(userId)
       .select('-password -__v -OTP')
       .populate('jobsPosted')
       .populate('wallet')
@@ -25,7 +25,7 @@ const getUserDataForDashboard = async (req: Request, res: Response) => {
 
     // If user is not found return and log out on FE
     if (!validUser) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
         message: 'Unable to get user data.',
         user: null,
@@ -50,4 +50,4 @@ const getUserDataForDashboard = async (req: Request, res: Response) => {
   }
 };
 
-export default getUserDataForDashboard;
+export default getFreelancerDataForDashboard;

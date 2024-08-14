@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     OTP: { number: Number, expiry: Number },
     emailVerified: { type: Boolean, default: false },
+    accountVerified: { type: Boolean, default: false },
     phoneNumber: { type: String, required: true },
     profilePicture: {
       type: String,
@@ -22,8 +23,6 @@ const UserSchema = new mongoose.Schema(
       state: String,
       latitude: { type: Number, default: 0.0 },
       longitude: { type: Number, default: 0.0 },
-      latitudeDelta: { type: Number, default: 0.0 },
-      longitudeDelta: { type: Number, default: 0.0 },
     },
     languages: [String],
     companyName: String,

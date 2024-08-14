@@ -7,6 +7,8 @@ const FreelancerSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     emailVerified: { type: Boolean, default: false },
+    accountVerified: { type: Boolean, default: false },
+    profileComplete: { type: Boolean, default: false },
     category: { type: String },
     OTP: { number: Number, expiry: Number },
     phoneNumber: { type: String, required: true },
@@ -24,15 +26,14 @@ const FreelancerSchema = new mongoose.Schema(
       state: String,
       latitude: { type: Number, default: 0.0 },
       longitude: { type: Number, default: 0.0 },
-      latitudeDelta: { type: Number, default: 0.0 },
-      longitudeDelta: { type: Number, default: 0.0 },
     },
     languages: [String],
     skills: [String],
     hourlyRate: { type: Number, default: 0.0 },
     availability: [String],
     bio: String,
-    title: String, // e.g., "Senior Web Developer"
+    title: String,
+
     education: [
       {
         institution: String,
@@ -42,6 +43,7 @@ const FreelancerSchema = new mongoose.Schema(
         to: Date,
       },
     ],
+
     experience: [
       {
         title: String,
@@ -51,6 +53,7 @@ const FreelancerSchema = new mongoose.Schema(
         description: String,
       },
     ],
+
     portfolio: [
       {
         title: String,
@@ -59,6 +62,7 @@ const FreelancerSchema = new mongoose.Schema(
         images: [String],
       },
     ],
+
     certifications: [
       {
         name: String,
@@ -67,6 +71,7 @@ const FreelancerSchema = new mongoose.Schema(
         link: String,
       },
     ],
+
     socialMedia: {
       linkedin: String,
       behance: String,
@@ -74,6 +79,7 @@ const FreelancerSchema = new mongoose.Schema(
       github: String,
       website: String,
     },
+
     paymentInfo: {
       paypalEmail: String,
       bankInfo: mongoose.Schema.Types.Mixed,
