@@ -12,7 +12,7 @@ const JobSchema = new mongoose.Schema(
     },
     category: { type: String, required: true },
     budget: {
-      type: { type: String, enum: ['Fixed', 'Hourly'], required: true },
+      type: { type: String, enum: ['Fixed', 'Salary'], required: true },
       amount: { type: Number, required: true },
     },
     skills: [String],

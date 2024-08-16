@@ -22,8 +22,32 @@ const SignIn = async (req: Request, res: Response) => {
     // Find user from Users Collection
     validUser = await Users.findOne({ email });
 
+    // Update Last Login Field
+    if (validUser)
+      validUser = await Users.findOneAndUpdate(
+        { email },
+        {
+          $set: {
+            lastLogin: new Date().toISOString(),
+          },
+        },
+        { new: true }
+      );
+
     if (!validUser) {
       validUser = await Freelancers.findOne({ email }).lean();
+
+      // Update Last Login Field
+      if (validUser)
+        validUser = await Freelancers.findOneAndUpdate(
+          { email },
+          {
+            $set: {
+              lastLogin: new Date().toISOString(),
+            },
+          },
+          { new: true }
+        );
     }
 
     // if Credentials is still not found then return 400

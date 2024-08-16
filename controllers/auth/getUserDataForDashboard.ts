@@ -9,12 +9,12 @@ import { Users } from '../../models/models';
  * @returns a filtered user object or error message object and null
  */
 const getUserDataForDashboard = async (req: Request, res: Response) => {
-  const { userId } = req.body;
+  const { _id } = (req as Request & { user: any }).user;
 
   try {
     // Retrieve user from Database by _id
     // Find user from Users Collection
-    const validUser = await Users.findById(userId)
+    const validUser = await Users.findById(_id)
       .select('-password -__v -OTP')
       .populate('jobsPosted')
       .populate('wallet')

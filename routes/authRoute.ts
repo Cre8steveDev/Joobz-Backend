@@ -15,6 +15,8 @@ import updateUserLocation from '../controllers/auth/updateUserLocation';
 import updateUserProfile from '../controllers/auth/updateUserProfile';
 import getFreelancerDataForDashboard from '../controllers/auth/getFreelancerDataForDashboard';
 import updateFreelancerLocation from '../controllers/auth/updateFreelancerLocation';
+import verifyFreelancer from '../middleware/verifyFreelancer';
+import updateProfilePhoto from '../controllers/auth/updateProfilePhoto';
 
 //  Instantiate Auth Router
 const router = Router();
@@ -28,10 +30,10 @@ router.post('/renew-otp', RenewOTP);
 router.get('/refresh-token', verifyUser, refreshToken);
 
 // Get user and freelancer profile Data.
-router.post('/get-user-profile-data', verifyUser, getUserDataForDashboard);
-router.post(
+router.get('/get-user-profile-data', verifyUser, getUserDataForDashboard);
+router.get(
   '/get-freelancer-profile-data',
-  verifyUser,
+  verifyFreelancer,
   getFreelancerDataForDashboard
 );
 
@@ -40,7 +42,8 @@ router.post('/update-location', updateUserLocation);
 router.post('/update-freelancer-location', updateFreelancerLocation);
 
 // Update User Profile
-router.post('/update-user-profile', updateUserProfile);
+router.post('/update-user-profile', verifyUser, updateUserProfile);
+router.post('/update-profile-photo', updateProfilePhoto);
 
 // Wallets
 router.get('/get-wallet', verifyUser, getWallet);

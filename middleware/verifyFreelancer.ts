@@ -15,7 +15,7 @@ const verifyFreelancer = async (
   if (!userAuthorization) {
     return res.status(401).json({
       success: false,
-      message: 'User not authorized.',
+      message: 'User not authorized. Please Sign In.',
     });
   }
 

@@ -9,18 +9,18 @@ import { Freelancers } from '../../models/models';
  * @returns a filtered freelancer object or error message object and null
  */
 const getFreelancerDataForDashboard = async (req: Request, res: Response) => {
-  const { userId } = req.body;
+  const { _id } = (req as Request & { user: any }).user;
 
   try {
     // Retrieve Freelancer from Database by _id
     // Find Freelancer from Freelancers Collection
-    const validUser = await Freelancers.findById(userId)
+    const validUser = await Freelancers.findById(_id)
       .select('-password -__v -OTP')
-      .populate('jobsPosted')
       .populate('wallet')
       .populate('reviews')
+      .populate('jobsCompleted')
+      .populate('currentJobs')
       .populate('invitations')
-      .populate('paymentMethods')
       .lean();
 
     // If user is not found return and log out on FE

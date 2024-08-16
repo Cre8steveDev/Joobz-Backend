@@ -8,8 +8,6 @@ import { Users, Jobs } from '../../models/models';
  * @returns Returns success: true && job data or success: false && job: null
  */
 const getSingleJobData = async (req: Request, res: Response) => {
-  const { _id } = (req as Request & { user: any }).user;
-
   const { jobId } = req.body;
 
   try {

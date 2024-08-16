@@ -84,7 +84,7 @@ const FreelancerSchema = new mongoose.Schema(
       paypalEmail: String,
       bankInfo: mongoose.Schema.Types.Mixed,
     },
-
+    credits: { type: Number, default: 10 },
     jobsCompleted: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Jobs' }],
     currentJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Jobs' }],
     wallet: { type: mongoose.Schema.Types.ObjectId, ref: 'Wallets' },

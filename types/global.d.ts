@@ -51,11 +51,13 @@ export interface FreelanceUser extends Document {
   emailVerified: boolean;
   accountVerified: boolean;
   phoneNumber: string;
+  category: string;
   profilePicture: string;
   ROLE: string;
   dateJoined: Date;
   lastLogin: Date;
   isActive: boolean;
+  credits: number;
   location: {
     country: string;
     state: string;
