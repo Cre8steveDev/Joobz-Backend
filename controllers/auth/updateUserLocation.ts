@@ -23,9 +23,6 @@ const updateUserLocation = async (req: Request, res: Response) => {
       { new: true }
     );
 
-    console.log('User updates: %s | %s | %s', userId, longitude, latitude);
-    console.log('Updated user: ', user);
-
     if (user) {
       return res.status(200).json({
         success: true,

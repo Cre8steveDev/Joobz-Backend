@@ -176,3 +176,17 @@ export type LoggedInFreelancer = {
     longitude: number;
   };
 };
+
+// Type for Create and Edit Job
+export type CreateJob = {
+  title: string;
+  description: string;
+  client: string;
+  category: string;
+  budget: { type: 'Fixed' | 'Salary'; amount: string };
+  skills: string;
+  state: string;
+  pictures: string[];
+  status: 'Open' | 'In-Progress' | 'Completed' | 'Cancelled';
+  deadline: string;
+};

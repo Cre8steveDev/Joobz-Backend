@@ -43,9 +43,7 @@ const UserSignUp = async (req: Request, res: Response) => {
     const randomOTP = generateRandomNumber(5);
     const OTPExpiry = Date.now() + 1000 * 60 * 5;
 
-    console.log('OTP FOR USER: ', randomOTP);
-
-    // Create New User
+        // Create New User
     const newUser = new Users({
       fullName,
       email: email.toLowerCase().trim(),

@@ -11,8 +11,6 @@ const getSingleProfessionalById = async (req: Request, res: Response) => {
   // Get the userID from the request body
   const { userId } = req.body;
 
-  console.log('User ID: ', userId);
-
   // Retrieve the Data from Database
   try {
     const freelancer = await Freelancers.findById(userId)

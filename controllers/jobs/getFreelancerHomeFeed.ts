@@ -20,8 +20,6 @@ const getFreelancerHomeFeed: (req: any, res: any) => any = async (
   // Parameters
   const { filter } = req.query;
 
-  console.log('Endpoint Query: ', filter);
-
   let operation: any;
 
   // Compose Filter option based on query type.
@@ -39,8 +37,6 @@ const getFreelancerHomeFeed: (req: any, res: any) => any = async (
         createdAt: -1,
       })
       .lean();
-
-    console.log('User jobs found: ', allUserJobs);
 
     return res.status(200).json({ success: true, jobs: allUserJobs });
   } catch (error) {

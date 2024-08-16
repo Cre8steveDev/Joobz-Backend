@@ -60,8 +60,6 @@ const FreelanceSignUp = async (req: Request, res: Response) => {
     const randomOTP = generateRandomNumber(5);
     const OTPExpiry = Date.now() + 1000 * 60 * 5;
 
-    console.log('GENERATED OTP: ', randomOTP);
-
     // Create New Freelancer
     const newUser = new Freelancers({
       fullName,

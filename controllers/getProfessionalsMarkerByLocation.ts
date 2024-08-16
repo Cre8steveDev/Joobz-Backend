@@ -36,9 +36,6 @@ const getProfessionalsMarkerByLocation = async (
       },
     ]);
 
-    // console.log('USER LOCATION: ', userLocation);
-    // console.log('Freelancers found: ', allFreelancers);
-
     return res.status(200).json({
       success: true,
       message: 'Successfully retrieved marker data for all freelancers',

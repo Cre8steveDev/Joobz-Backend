@@ -16,9 +16,8 @@ const getSingleJobData = async (req: Request, res: Response) => {
       .populate({
         path: 'client',
         select:
-          'fullName email phoneNumber profilePicture companyName industry socialMedia _id',
+          'fullName profilePicture companyName industry socialMedia _id state',
       })
-      .populate(['proposals'])
       .lean();
 
     return res.status(200).json({ success: true, job });
