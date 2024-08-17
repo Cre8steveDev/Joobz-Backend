@@ -4,6 +4,8 @@ import { Freelancers, Wallets } from '../../models/models';
 import { RegisterData } from '../../types/global';
 import generateRandomNumber from '../../utils/generateRandomNumbers';
 
+import sendEmailToUser from '../../utils/sendEmailMessage';
+
 /**
  * FreelanceSignup - Controller for creating a New Freelancer Account
  * @param req - Request Object from the Client
@@ -53,11 +55,13 @@ const FreelanceSignUp = async (req: Request, res: Response) => {
   }
 
   // Initiate Freelancer Account Creation
+
+  let randomOTP: number;
   try {
     const salt = bcryptjs.genSaltSync(10);
     const hashedPassword = bcryptjs.hashSync(password, salt);
 
-    const randomOTP = generateRandomNumber(5);
+    randomOTP = generateRandomNumber(5);
     const OTPExpiry = Date.now() + 1000 * 60 * 5;
 
     // Create New Freelancer
@@ -83,6 +87,12 @@ const FreelanceSignUp = async (req: Request, res: Response) => {
     }
     return res.status(403).json({ success: false, message: error!.message });
   }
+
+  // Send OTP to user via Email
+  await sendEmailToUser('OTPEmail', email, 'Joobz: Verify OTP ✅', {
+    username: fullName.split(' ')[0],
+    otpCode: randomOTP,
+  });
 
   return res.status(201).json({
     success: true,

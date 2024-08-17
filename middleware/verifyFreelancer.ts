@@ -50,7 +50,11 @@ const verifyFreelancer = async (
         req.user = isValidUser;
         return next();
       }
-      throw new Error();
+
+      return res.status(401).json({
+        success: false,
+        message: 'User not authorized. Please Sign In.',
+      });
     } catch (error) {
       console.log(error);
       return res.status(500).json({

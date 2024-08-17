@@ -24,11 +24,11 @@ const getFreelancerHomeFeed: (req: any, res: any) => any = async (
 
   // Compose Filter option based on query type.
   if (filter === 'state') {
-    operation = { state: location.state };
+    operation = { state: location.state, status: 'Open' };
   } else if (filter === 'category') {
-    operation = { category, state: location.state };
+    operation = { category, state: location.state, status: 'Open' };
   } else {
-    operation = {};
+    operation = { status: 'Open' };
   }
 
   try {

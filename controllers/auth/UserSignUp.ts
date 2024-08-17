@@ -4,6 +4,8 @@ import { Users, Wallets } from '../../models/models';
 import { RegisterData } from '../../types/global';
 import generateRandomNumber from '../../utils/generateRandomNumbers';
 
+import sendEmailToUser from '../../utils/sendEmailMessage';
+
 /**
  * UserSignUp - Controller for creating a New User Account
  * @param req - Request Object from the Client
@@ -36,14 +38,15 @@ const UserSignUp = async (req: Request, res: Response) => {
   }
 
   // Initiate User Account Creation
+  let randomOTP: number;
   try {
     const salt = bcryptjs.genSaltSync(10);
     const hashedPassword = bcryptjs.hashSync(password, salt);
 
-    const randomOTP = generateRandomNumber(5);
+    randomOTP = generateRandomNumber(5);
     const OTPExpiry = Date.now() + 1000 * 60 * 5;
 
-        // Create New User
+    // Create New User
     const newUser = new Users({
       fullName,
       email: email.toLowerCase().trim(),
@@ -64,6 +67,12 @@ const UserSignUp = async (req: Request, res: Response) => {
     }
     return res.status(403).json({ success: false, message: error!.message });
   }
+
+  // Send OTP to user via Email
+  await sendEmailToUser('OTPEmail', email, 'Joobz: Verify OTP ✅', {
+    username: fullName.split(' ')[0],
+    otpCode: randomOTP,
+  });
 
   return res
     .status(201)

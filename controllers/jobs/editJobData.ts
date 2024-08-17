@@ -51,7 +51,7 @@ const editJobData = async (req: Request, res: Response) => {
       .populate({
         path: 'client',
         select:
-          'fullName profilePicture companyName industry socialMedia _id state',
+          'fullName profilePicture companyName industry socialMedia _id state averageRating',
       })
       .lean();
 

@@ -11,6 +11,7 @@ export interface User extends Document {
   profilePicture: string;
   emailVerified: boolean;
   accountVerified: boolean;
+  profileComplete: boolean;
   ROLE: string;
   dateJoined: Date;
   lastLogin: Date;
@@ -50,7 +51,9 @@ export interface FreelanceUser extends Document {
   OTP: { number: number; expiry: Date };
   emailVerified: boolean;
   accountVerified: boolean;
+  profileComplete: boolean;
   phoneNumber: string;
+  displayName: string;
   category: string;
   profilePicture: string;
   ROLE: string;
@@ -150,6 +153,7 @@ export type LoggedInUser = {
   email: string;
   emailVerified: boolean;
   accountVerified: boolean;
+  profileComplete: boolean;
   ROLE: string;
   location: {
     country: string;
@@ -167,8 +171,11 @@ export type LoggedInFreelancer = {
   profilePicture: string;
   emailVerified: boolean;
   accountVerified: boolean;
+  profileComplete: boolean;
   wallet: ObjectId;
+  credits: number;
   ROLE: string;
+  category: string;
   location: {
     country: string;
     state: string;

@@ -83,18 +83,20 @@ const SignIn = async (req: Request, res: Response) => {
     let userData: LoggedInUser | LoggedInFreelancer;
 
     // Destructure values from the user
-    // @ts-ignore
+
     if (validUser.ROLE === 'FREELANCER') {
       const {
         fullName,
         profilePicture,
         wallet,
         _id,
-        // @ts-ignore
         displayName,
         emailVerified,
         accountVerified,
+        profileComplete,
+        category,
         ROLE,
+        credits,
         email,
         location,
       } = validUser as FreelanceUser;
@@ -107,8 +109,11 @@ const SignIn = async (req: Request, res: Response) => {
         wallet,
         emailVerified,
         accountVerified,
+        profileComplete,
         email,
+        category,
         ROLE,
+        credits,
         location,
       };
     } else {
@@ -117,9 +122,9 @@ const SignIn = async (req: Request, res: Response) => {
         profilePicture,
         wallet,
         _id,
-        // @ts-ignore
         emailVerified,
         accountVerified,
+        profileComplete,
         ROLE,
         email,
         location,
@@ -134,6 +139,7 @@ const SignIn = async (req: Request, res: Response) => {
         email,
         emailVerified,
         accountVerified,
+        profileComplete,
         location,
       };
     }

@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema(
     OTP: { number: Number, expiry: Number },
     emailVerified: { type: Boolean, default: false },
     accountVerified: { type: Boolean, default: false },
+    profileComplete: { type: Boolean, default: false },
     phoneNumber: { type: String, required: true },
     profilePicture: {
       type: String,
