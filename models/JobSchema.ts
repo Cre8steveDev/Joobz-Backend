@@ -20,6 +20,7 @@ const JobSchema = new mongoose.Schema(
     pictures: [String],
     datePosted: { type: Date, default: Date.now },
     deadline: String,
+    escrow: Boolean,
     status: {
       type: String,
       enum: ['Open', 'In-Progress', 'Completed', 'Cancelled'],
@@ -34,7 +35,7 @@ const JobSchema = new mongoose.Schema(
         proposedAmount: { type: Number, default: 0 },
         status: {
           type: String,
-          enum: ['Pending', 'Accepted', 'Rejected'],
+          enum: ['Pending', 'Accepted', 'Declined'],
           default: 'Pending',
         },
         description: { type: String, default: '' },

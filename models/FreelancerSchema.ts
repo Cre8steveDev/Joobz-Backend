@@ -86,6 +86,7 @@ const FreelancerSchema = new mongoose.Schema(
     },
     credits: { type: Number, default: 10 },
     jobsCompleted: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Jobs' }],
+    jobsAppliedFor: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Jobs' }],
     currentJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Jobs' }],
     wallet: { type: mongoose.Schema.Types.ObjectId, ref: 'Wallets' },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],

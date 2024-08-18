@@ -196,4 +196,5 @@ export type CreateJob = {
   pictures: string[];
   status: 'Open' | 'In-Progress' | 'Completed' | 'Cancelled';
   deadline: string;
+  escrow: boolean;
 };
