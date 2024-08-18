@@ -11,28 +11,38 @@ const updateProfilePhoto = async (req: Request, res: Response) => {
   // Take update data from request object
   const { userId, type, picture } = req.body;
 
+  let user: any;
+
   try {
     if (type === 'User') {
-      await Users.findOneAndUpdate(
+      user = await Users.findOneAndUpdate(
         { _id: userId },
-        { $set: { profilePicture: picture } }
+        { $set: { profilePicture: picture } },
+        { new: true }
+      ).select(
+        '_id fullName profilePicture wallet email emailVerified accountVerified profileComplete ROLE location'
       );
     } else if (type === 'Freelancer') {
-      await Freelancers.findOneAndUpdate(
+      user = await Freelancers.findOneAndUpdate(
         { _id: userId },
-        { $set: { profilePicture: picture } }
+        { $set: { profilePicture: picture } },
+        { new: true }
+      ).select(
+        '_id fullName profilePicture wallet email emailVerified accountVerified profileComplete ROLE location'
       );
-    }
+    } else throw new Error();
 
     return res.status(201).json({
       success: true,
       message: 'Profile photo updated successfully.',
+      user,
     });
   } catch (error) {
     console.error('Error updating user location:', error);
     return res.status(500).json({
       success: false,
       message: 'Unable to update profile photo',
+      user: null,
     });
   }
 };

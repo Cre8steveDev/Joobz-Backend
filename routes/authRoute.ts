@@ -11,7 +11,7 @@ import updateWallet from '../controllers/auth/updateWallet';
 import VerifyOTP from '../controllers/auth/VerifyOTP';
 import RenewOTP from '../controllers/auth/RenewOTP';
 import getUserDataForDashboard from '../controllers/auth/getUserDataForDashboard';
-import updateUserLocation from '../controllers/auth/updateUserLocation';
+import updateUserLocation from '../controllers/auth/updateLocation';
 import updateUserProfile from '../controllers/auth/updateUserProfile';
 import getFreelancerDataForDashboard from '../controllers/auth/getFreelancerDataForDashboard';
 import updateFreelancerLocation from '../controllers/auth/updateFreelancerLocation';
@@ -43,6 +43,7 @@ router.post('/update-freelancer-location', updateFreelancerLocation);
 
 // Update User Profile
 router.post('/update-user-profile', verifyUser, updateUserProfile);
+router.post('/update-freelancer-profile', verifyFreelancer, updateUserProfile);
 router.post('/update-profile-photo', updateProfilePhoto);
 
 // Wallets
