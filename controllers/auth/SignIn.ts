@@ -61,7 +61,10 @@ const SignIn = async (req: Request, res: Response) => {
     }
 
     // Compare password from client with password stored in database
-    const isPasswordMatch = bcryptjs.compareSync(password, validUser.password);
+    const isPasswordMatch = bcryptjs.compareSync(
+      password.trim(),
+      validUser.password
+    );
 
     if (!isPasswordMatch) {
       return res.status(400).json({

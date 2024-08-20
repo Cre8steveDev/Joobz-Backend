@@ -23,17 +23,30 @@ const updateUserProfile = async (req: Request, res: Response) => {
     // Update Operation for  Socials
     if (type === 'Socials') {
       updateOperation = { $set: { socialMedia: data } };
+
+      // Personal Data update
     } else if (type === 'Personal-Data') {
       updateOperation = {
         $set: {
           languages: langs,
           companyName: data.companyName,
           industry: data.industry,
-          email: data.email,
-          phoneNumber: data.phoneNumber,
           bio: data.bio,
         },
       };
+
+      // Account Information
+    } else if (type === 'Account-Info') {
+      updateOperation = {
+        $set: {
+          phoneNumber: data.phoneNumber,
+          password: data.password,
+          email: data.email,
+          contactAddress: data.contactAddress,
+        },
+      };
+
+      // Unknown operation. Throw error
     } else {
       throw new Error('Invalid Operations type');
     }

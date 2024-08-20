@@ -15,7 +15,7 @@ const getSingleProfessionalById = async (req: Request, res: Response) => {
   try {
     const freelancer = await Freelancers.findById(userId)
       .select(
-        '_id fullName category averageRating location profilePicture dateJoined lastLogin isActive languages skills hourlyRate availability bio title education experience portfolio certifications socialMedia jobsCompleted currentJobs reviews '
+        '_id fullName category averageRating location profilePicture dateJoined lastLogin isActive languages skills hourlyRate availability bio title curriculumVitae portfolio socialMedia jobsCompleted currentJobs reviews contactAddress'
       )
       .lean();
 

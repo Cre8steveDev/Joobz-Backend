@@ -38,10 +38,18 @@ const getFreelancerHomeFeed: (req: any, res: any) => any = async (
       })
       .lean();
 
-    return res.status(200).json({ success: true, jobs: allUserJobs });
+    return res
+      .status(200)
+      .json({ success: true, jobs: allUserJobs, message: 'Success' });
   } catch (error) {
     console.log('Error occured: ', error);
-    return res.status(500).json({ success: false, jobs: null });
+    return res
+      .status(500)
+      .json({
+        success: false,
+        jobs: null,
+        message: 'Unable to retrieve job feed. Try again later.',
+      });
   }
 };
 

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { Users } from '../../models/models';
+import { Freelancers } from '../../models/models';
 
 /**
- * Update User's Profile Based on the type sent from Front end
+ * Update Freelancer's Profile Based on the type sent from Front end
  * @param req Request Object
  * @param res Response Object
  * @returns Returns Success True or False
@@ -10,6 +10,8 @@ import { Users } from '../../models/models';
 const updateFreelancerProfile = async (req: Request, res: Response) => {
   // Take update data from request object
   const { userId, type, data } = req.body;
+
+  console.log('THE REQUEST BODY: ', req.body);
 
   const langs = String(data.languages)
     .trim()
@@ -26,12 +28,27 @@ const updateFreelancerProfile = async (req: Request, res: Response) => {
     } else if (type === 'Personal-Data') {
       updateOperation = {
         $set: {
-          languages: langs,
-          companyName: data.companyName,
-          industry: data.industry,
-          email: data.email,
-          phoneNumber: data.phoneNumber,
           bio: data.bio,
+          title: data.title,
+          languages: langs,
+          skills: data.skills,
+          availability: data.availability,
+          paymentInfo: {
+            paypalEmail: data.paypalEmail,
+            bankInfo: {
+              accountNumber: data.accountNumber,
+              bankName: data.bankName,
+            },
+          },
+        },
+      };
+    } else if (type === 'Account-Info') {
+      updateOperation = {
+        $set: {
+          phoneNumber: data.phoneNumber,
+          password: data.password,
+          email: data.email,
+          contactAddress: data.contactAddress,
         },
       };
     } else {
@@ -39,7 +56,7 @@ const updateFreelancerProfile = async (req: Request, res: Response) => {
     }
 
     // Carry out the update operation
-    const updatedUser = await Users.findOneAndUpdate(
+    const updatedUser = await Freelancers.findOneAndUpdate(
       { _id: userId },
       updateOperation,
       {
@@ -47,11 +64,12 @@ const updateFreelancerProfile = async (req: Request, res: Response) => {
       }
     )
       .select('-password -__v -OTP')
-      .populate('jobsPosted')
+      .populate('currentJobs')
+      .populate('jobsCompleted')
+      .populate('jobsAppliedFor')
       .populate('wallet')
       .populate('reviews')
-      .populate('invitations')
-      .populate('paymentMethods');
+      .populate('invitations');
 
     return res.status(201).json({ success: true, user: updatedUser });
   } catch (error) {

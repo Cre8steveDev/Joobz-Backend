@@ -8,6 +8,7 @@ export interface User extends Document {
   password: string;
   OTP: { number: number; expiry: Date };
   phoneNumber: string;
+  contactAddress: string;
   profilePicture: string;
   emailVerified: boolean;
   accountVerified: boolean;
@@ -53,6 +54,7 @@ export interface FreelanceUser extends Document {
   accountVerified: boolean;
   profileComplete: boolean;
   phoneNumber: string;
+  contactAddress: string;
   displayName: string;
   category: string;
   profilePicture: string;
@@ -73,24 +75,8 @@ export interface FreelanceUser extends Document {
   availability: string;
   bio: string;
   title: string;
-  education: [
-    {
-      institution: string;
-      degree: string;
-      fieldOfStudy: string;
-      from: Date;
-      to: Date;
-    }
-  ];
-  experience: [
-    {
-      title: string;
-      company: string;
-      from: Date;
-      to: Date;
-      description: string;
-    }
-  ];
+
+  curriculumVitae: string;
 
   portfolio: [
     {
@@ -100,14 +86,7 @@ export interface FreelanceUser extends Document {
       images: string[];
     }
   ];
-  certifications: [
-    {
-      name: string;
-      issuer: string;
-      dateObtained: Date;
-      link: Date;
-    }
-  ];
+
   socialMedia: {
     linkedin: string;
     behance: string;
@@ -121,6 +100,7 @@ export interface FreelanceUser extends Document {
   };
   jobsCompleted: any[];
   currentJobs: any[];
+  invitations: any[];
   wallet: ObjectId;
   reviews: any[];
   averageRating: number;

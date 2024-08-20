@@ -53,7 +53,7 @@ const verifyFreelancer = async (
 
       return res.status(401).json({
         success: false,
-        message: 'User not authorized. Please Sign In.',
+        message: 'Invalid User Credentials provided. Please try again.',
       });
     } catch (error) {
       console.log(error);

@@ -16,10 +16,11 @@ const getFreelancerDataForDashboard = async (req: Request, res: Response) => {
     // Find Freelancer from Freelancers Collection
     const validUser = await Freelancers.findById(_id)
       .select('-password -__v -OTP')
+      .populate('currentJobs')
+      .populate('jobsCompleted')
+      .populate('jobsAppliedFor')
       .populate('wallet')
       .populate('reviews')
-      .populate('jobsCompleted')
-      .populate('currentJobs')
       .populate('invitations')
       .lean();
 

@@ -17,6 +17,7 @@ import getFreelancerDataForDashboard from '../controllers/auth/getFreelancerData
 import updateFreelancerLocation from '../controllers/auth/updateFreelancerLocation';
 import verifyFreelancer from '../middleware/verifyFreelancer';
 import updateProfilePhoto from '../controllers/auth/updateProfilePhoto';
+import updateFreelancerProfile from '../controllers/auth/updateFreelancerProfile';
 
 //  Instantiate Auth Router
 const router = Router();
@@ -43,7 +44,12 @@ router.post('/update-freelancer-location', updateFreelancerLocation);
 
 // Update User Profile
 router.post('/update-user-profile', verifyUser, updateUserProfile);
-router.post('/update-freelancer-profile', verifyFreelancer, updateUserProfile);
+router.post(
+  '/update-freelancer-profile',
+  verifyFreelancer,
+  updateFreelancerProfile
+);
+
 router.post('/update-profile-photo', updateProfilePhoto);
 
 // Wallets

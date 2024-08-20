@@ -6,6 +6,7 @@ const FreelancerSchema = new mongoose.Schema(
     displayName: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    contactAddress: String,
     emailVerified: { type: Boolean, default: false },
     accountVerified: { type: Boolean, default: false },
     profileComplete: { type: Boolean, default: false },
@@ -34,26 +35,6 @@ const FreelancerSchema = new mongoose.Schema(
     bio: String,
     title: String,
 
-    education: [
-      {
-        institution: String,
-        degree: String,
-        fieldOfStudy: String,
-        from: Date,
-        to: Date,
-      },
-    ],
-
-    experience: [
-      {
-        title: String,
-        company: String,
-        from: Date,
-        to: Date,
-        description: String,
-      },
-    ],
-
     portfolio: [
       {
         title: String,
@@ -63,14 +44,7 @@ const FreelancerSchema = new mongoose.Schema(
       },
     ],
 
-    certifications: [
-      {
-        name: String,
-        issuer: String,
-        dateObtained: Date,
-        link: String,
-      },
-    ],
+    curriculumVitae: String,
 
     socialMedia: {
       linkedin: String,
