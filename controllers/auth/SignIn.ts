@@ -77,7 +77,7 @@ const SignIn = async (req: Request, res: Response) => {
 
     // If they match, then create a jsonwebtoken
     // and sign the user Id and send back
-    const tokenExpiry = Date.now() + 20 * 60 * 1000;
+    const tokenExpiry = Date.now() + 50 * 60 * 1000;
     const userToken = jwt.sign(
       { id: validUser._id, tokenExpiry },
       COOKIE_SECRET!

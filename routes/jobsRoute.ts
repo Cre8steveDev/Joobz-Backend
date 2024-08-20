@@ -16,7 +16,7 @@ router.get('/all-by-user', verifyUser, getAllJobsByUser);
 router.put('/edit-job-data', verifyUser, editJobData);
 router.put('/change-job-status', verifyUser, changeJobStatus);
 
-router.put('/submit-proposal', verifyFreelancer, submitProposal);
+router.put('/submit-proposal', submitProposal);
 
 router.post('/job-data', getSingleJobData);
 router.get('/freelancer-home-feed', verifyFreelancer, getFreelancerHomeFeed);

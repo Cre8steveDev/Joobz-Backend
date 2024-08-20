@@ -19,6 +19,7 @@ const createNewJob = async (req: Request, res: Response) => {
       title: job.title,
       description: job.description,
       client: _id,
+      escrow: job.escrow,
       category: job.category,
       budget: job.budget,
       skills,

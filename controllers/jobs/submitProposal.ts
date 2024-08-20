@@ -82,7 +82,7 @@ const submitProposal = async (req: Request, res: Response) => {
     // Add the job to the user as part of jobs applied for.
     if (type === 'ACCEPT' || type === 'NEW' || type === 'DELETE') {
       const submittedUser = await Freelancers.findOneAndUpdate(
-        { _id: userId },
+        { _id: proposal.freelancer },
         updateFreelanceOp
       );
 
