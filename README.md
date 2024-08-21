@@ -43,8 +43,6 @@ I invite you to explore Joobz and experience the future of service networking â€
 
 ## Productivity Tools
 
-Thank you for providing the detailed information about your Express.js app routes and controllers. I'll create documentation for the main endpoints you've shared. Here's a draft of the documentation you can include in your README:
-
 ## API Documentation
 
 ## Authentication
